@@ -18,6 +18,29 @@ void Swap(int p[], int i, int j)
     p[j] = temp;
 }
 
+void InsertionSort(int p[], int n)
+{
+    printf("%s\n", __FUNCTION__);
+    int j, temp;
+    for (int i = 1; i < n; ++i)
+    {
+        if (p[i] < p[i - 1])
+        {
+            temp = p[i];
+
+            for (j = i - 1; j >= 0 && p[j] > temp; --j)
+            {
+                p[j + 1] = p[j];
+            }
+
+            p[j + 1] = temp;
+        }
+
+        printf("Round %d\n", i - 1);
+        Print(p, n);
+    }
+}
+
 void SelectionSort(int p[], int n)
 {
     printf("%s\n", __FUNCTION__);
@@ -96,6 +119,10 @@ int main(int argc, const char *argv[])
     int c[10] = {34, 18, 76, 37, 96, 45, 82, 23, 53, 68};
     Print(c, 10);
     SelectionSort(c, 10);
+
+    int d[10] = {34, 18, 76, 37, 96, 45, 82, 23, 53, 68};
+    Print(d, 10);
+    InsertionSort(d, 10);
 
     return 0;
 }
