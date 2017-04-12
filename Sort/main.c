@@ -18,9 +18,50 @@ void Swap(int p[], int i, int j)
     p[j] = temp;
 }
 
+void BinaryInsertionSort(int p[], int n)
+{
+    printf("\n%s\n", __FUNCTION__);
+    Print(p, n);
+
+    for (int i = 1; i < n; ++i)
+    {
+        int low = 0, high = i - 1, temp = p[i];
+        printf("low = %d, high = %d\n", low, high);
+
+        while (low <= high)
+        {
+            int mid = (high + low) / 2;
+            if (p[mid] <= temp)
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
+
+            printf("low = %d, high = %d\n", low, high);
+        }
+
+        for (int j = i; j > low; --j)
+        {
+            p[j] = p[j - 1];
+            Print(p, n);
+        }
+
+        if (low != i)
+        {
+            p[low] = temp;
+        }
+
+        printf("Round %d\n", i - 1);
+        Print(p, n);
+    }
+}
+
 void InsertionSort(int p[], int n)
 {
-    printf("%s\n", __FUNCTION__);
+    printf("\n%s\n", __FUNCTION__);
     int j, temp;
     for (int i = 1; i < n; ++i)
     {
@@ -43,7 +84,7 @@ void InsertionSort(int p[], int n)
 
 void SelectionSort(int p[], int n)
 {
-    printf("%s\n", __FUNCTION__);
+    printf("\n%s\n", __FUNCTION__);
     int minIndex;
     for (int i = 0; i < n; ++i)
     {
@@ -69,7 +110,7 @@ void SelectionSort(int p[], int n)
 
 void OptimizedBubbleSort(int p[], int n)
 {
-    printf("%s\n", __FUNCTION__);
+    printf("\n%s\n", __FUNCTION__);
     int alreadySorted = 1;
     for (int i = 0; i < n - 1 && alreadySorted; ++i)
     {
@@ -90,7 +131,7 @@ void OptimizedBubbleSort(int p[], int n)
 
 void BubbleSort(int p[], int n)
 {
-    printf("%s\n", __FUNCTION__);
+    printf("\n%s\n", __FUNCTION__);
     for (int i = 0; i < n - 1; ++i)
     {
         for (int j = n - 1; j > i; --j)
@@ -123,6 +164,10 @@ int main(int argc, const char *argv[])
     int d[10] = {34, 18, 76, 37, 96, 45, 82, 23, 53, 68};
     Print(d, 10);
     InsertionSort(d, 10);
+
+    int e[10] = {34, 18, 76, 37, 96, 45, 82, 23, 53, 68};
+    Print(e, 10);
+    BinaryInsertionSort(e, 10);
 
     return 0;
 }
