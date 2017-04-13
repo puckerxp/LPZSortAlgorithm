@@ -18,6 +18,43 @@ void Swap(int p[], int i, int j)
     p[j] = temp;
 }
 
+void ShellSort(int p[], int n)
+{
+    int increment = n;
+
+    do
+    {
+        increment = increment / 3 + 1;
+        printf("Step increment: %d\n", increment);
+
+        for (int i = increment; i < n; ++i)
+        {
+            if (p[i] < p[i - increment])
+            {
+                int temp = p[i];
+
+                int j;
+                for (j = i - increment; j >= 0 && temp < p[j]; j -= increment)
+                {
+                    p[j + increment] = p[j];
+
+                    Print(p, n);
+                }
+
+                if (j != i - increment)
+                {
+                    p[j + increment] = temp;
+
+                    Print(p, n);
+                }
+            }
+        }
+
+        Print(p, n);
+    }
+    while (increment > 1);
+}
+
 void BinaryInsertionSort(int p[], int n)
 {
     printf("\n%s\n", __FUNCTION__);
@@ -168,6 +205,10 @@ int main(int argc, const char *argv[])
     int e[10] = {34, 18, 76, 37, 96, 45, 82, 23, 53, 68};
     Print(e, 10);
     BinaryInsertionSort(e, 10);
+
+    int f[30] = {23, 82, 12, 37, 4, 20, 6, 14, 79, 48, 57, 3, 77, 13, 43, 91, 47, 86, 9, 21, 19, 16, 93, 17, 7, 71, 77, 69, 88, 81};
+    Print(f, 30);
+    ShellSort(f, 30);
 
     return 0;
 }
